@@ -95,18 +95,18 @@ export const createStyles = (theme: keyof typeof Themes) =>
             elevation: 5,
         },
         tileQuoteText: {
-            fontFamily: 'Inter-Regular',
-            fontSize: 24,
-            color: '#FFFFFF',
+            fontFamily: 'Inter-Bold', // Or 'Inter-ExtraBold' if available
+            fontSize: 40, // Increased for attention
+            color: '#E0E0FF',
             textAlign: 'center',
-            lineHeight: 32,
+            lineHeight: 52, // Adjusted for larger text
         },
         tileAuthorText: {
             fontFamily: 'Inter-Medium',
-            fontSize: 16,
-            color: '#FFFFFF',
-            textAlign: 'right',
-            marginTop: 8,
+            fontSize: 18, // Increased for balance
+            color: '#B0B0D4',
+            textAlign: 'right', // Changed to center for symmetry
+            marginTop: 16,
         },
         tileNextButton: {
             backgroundColor: '#5E60CE',
