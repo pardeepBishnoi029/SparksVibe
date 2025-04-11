@@ -1,8 +1,8 @@
-// src/navigation/AppNavigator.tsx
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from '../screens/HomeScreen';
 import TrackerScreen from '../screens/TrackerScreen';
@@ -21,11 +21,12 @@ const TabNavigator: React.FC = () => (
                     Tracker: 'trending-up',
                     Awards: 'star',
                 };
-                return <Icon name={icons[route.name]} size={size} color={color} />;
+                const iconName = icons[route.name]; // Use route.name instead of Tab.useRoute().name
+                return <Icon name={iconName} size={size} color={color} />;
             },
             tabBarActiveTintColor: '#5E60CE',
             tabBarInactiveTintColor: '#2D2D2D',
-            headerShown: Platform.OS === 'web' ? false : undefined, // Explicitly handle web
+            headerShown: false, // Hide header for all tab screens
         })}
     >
         <Tab.Screen name="Home" component={HomeScreen} />
@@ -35,10 +36,12 @@ const TabNavigator: React.FC = () => (
 );
 
 const AppNavigator: React.FC = () => (
-    <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen name="Splash" component={SplashScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Main" component={TabNavigator} options={{ headerShown: false }} />
-    </Stack.Navigator>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+        <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Main" component={TabNavigator} />
+        </Stack.Navigator>
+    </GestureHandlerRootView>
 );
 
 export default AppNavigator;
